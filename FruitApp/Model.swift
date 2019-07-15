@@ -11,10 +11,23 @@ import UIKit
 typealias FruitEntity = (type:String, price:(pounds:Int, pence:Int)?, kgWeight:Double?)
 
 class Model: NSObject {
-
-    func parseJSONData(_ data:[String : Any]) -> [FruitEntity]? {
+    
+    
+    func dataToJSON(_ data:Data) -> [String : Any]? {
+  
+        do {
+            let json:[String : Any]? = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+            
+            return json
+        } catch {
+            return nil
+        }
         
-        let list:[Any?] = data["fruit"] as! [Any?]
+    }
+
+    func parseJSONData(_ json:[String : Any]) -> [FruitEntity]? {
+        
+        let list:[Any?] = json["fruit"] as! [Any?]
         
         let items:[FruitEntity]? = list.map { (item) -> FruitEntity in
             

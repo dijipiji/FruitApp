@@ -90,17 +90,19 @@ class FruitAppTests: XCTestCase {
     func testServiceReturnsJSON() {
         
         let expectation:XCTestExpectation = XCTestExpectation()
+        let model:Model = Model()
         
         _ = Service.getJSONData(query:Service.baseURL, callback: { (data, error) -> Void in
             
-            if error == nil {
-                do {
-                    let json:[String : Any]? = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+            if error == nil{
+        
+                let json:[String : Any]? = model.dataToJSON(data!)
+                
+                if json == nil {
+                    XCTAssert(false)
+                } else {
                     print("testServiceReturnsJSON, json=\(String(describing: json))")
                     XCTAssert(true)
-                } catch let error {
-                    print("testServiceReturnsJSON, error=\(error.localizedDescription)")
-                    XCTAssert(false)
                 }
             }
             
@@ -220,7 +222,7 @@ class FruitAppTests: XCTestCase {
                     let model:Model = Model()
                     let items:[FruitEntity]? = model.parseJSONData(unwrappedJSON)
                     
-                    // validate that each FruitEntity object contains data
+                    // validate that each FruitEntity object contains data, otherwise assert
                     for item in items ?? [] {
                         if item.type.count == 0 || item.price == nil || item.kgWeight == nil {
                             XCTAssert(false)
@@ -275,6 +277,7 @@ class FruitAppTests: XCTestCase {
         
     }
     
+    
     /**
      *
      */
@@ -292,6 +295,25 @@ class FruitAppTests: XCTestCase {
         if resultB != nil {
             XCTAssert(resultB! == 0.12)
         }
+    }
+    
+    
+    /**
+     * Tests that the Presenter is hooked up correctly and returns valid items
+     */
+    func testPresenterPresentsData() {
+        
+        _ = presenter.getData(callback:{ (data, error) -> Void in
+            let items:[FruitEntity]? = self.presenter.presentData(data,error)
+            // validate that each FruitEntity object contains data, otherwise assert
+            for item in items ?? [] {
+                if item.type.count == 0 || item.price == nil || item.kgWeight == nil {
+                    XCTAssert(false)
+                }
+            }
+            
+        })
+        
     }
     
     
