@@ -218,7 +218,7 @@ class FruitAppTests: XCTestCase {
                     }
                     
                     let model:Model = Model()
-                    model.parseJSONData(unwrappedJSON)
+                    _ = model.parseJSONData(unwrappedJSON)
                     XCTAssert(true)
                     
                 } catch let error {
@@ -232,6 +232,38 @@ class FruitAppTests: XCTestCase {
         })
         
         wait(for: [expectation], timeout: defaultTimeout)
+    }
+    
+    
+    func testModelPenceToPoundsAndPence() {
+        
+        let model = Model()
+        
+        let resultA = model.penceToPoundsAndPence(099)
+        
+        if resultA != nil {
+            XCTAssert(resultA!.pounds==0 && resultA!.pence==99)
+        }
+        
+        let resultB = model.penceToPoundsAndPence(2)
+        
+        if resultB != nil {
+            XCTAssert(resultB!.pounds==0 && resultB!.pence==2)
+        }
+        
+        let resultC = model.penceToPoundsAndPence(1050)
+        
+        if resultC != nil {
+            XCTAssert(resultC!.pounds==10 && resultC!.pence==50)
+        }
+        
+        let resultD = model.penceToPoundsAndPence(100)
+        
+        if resultD != nil {
+            XCTAssert(resultD!.pounds==1 && resultD!.pence==0)
+        }
+        
+        
     }
     
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias FruitEntity = (type:String, price:(pounds:Int, pence:Int), kgWeight:Double)
+typealias FruitEntity = (type:String, price:(pounds:Int, pence:Int)?, kgWeight:Double?)
 
 class Model: NSObject {
 
@@ -24,17 +24,35 @@ class Model: NSObject {
             
             let itemUnwrapped:[String:Any] = item! as! [String:Any]
             let type:String = itemUnwrapped["type"] as! String? ?? "unknown"
-            let price:Int? = itemUnwrapped["price"] as! Int?
-            let grammes:Int? = itemUnwrapped["price"] as! Int?
+            
+            let price:(pounds:Int, pence:Int)? = penceToPoundsAndPence(itemUnwrapped["price"] as! Int?)
+            let grammes:Int? = itemUnwrapped["weight"] as! Int?
             
             print("type=\(type)")
-            return FruitEntity(type:type, price:(pounds:1, pence:99), kgWeight:0.5)
+            print("price=\(price)")
+            return FruitEntity(type:type, price:price, kgWeight:0.5)
             
         }
         
         
-        return nil
+        return items
         
         
     }
+    
+    
+   
+    func penceToPoundsAndPence(_ pence:Int?) -> (pounds:Int, pence:Int)? {
+
+        guard let pence:Int = pence else {
+            return nil
+        }
+        
+        let pounds:Int = Int(floor(Float(pence)/100))
+        let remainingPence:Int = pence - (pounds*100)
+        
+        return (pounds:pounds, pence:remainingPence)
+        
+    }
+    
 }
