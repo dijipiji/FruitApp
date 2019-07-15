@@ -20,7 +20,7 @@ class Presenter: NSObject {
             callback(data, error)
         })
         
-       return validURL
+        return validURL
     }
     
     

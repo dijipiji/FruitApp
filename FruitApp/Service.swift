@@ -25,6 +25,7 @@ class Service: NSObject {
         
         session.dataTask(with: myURL) {
             (data, response, error) in
+
             callback(data, error)
             }.resume()
         

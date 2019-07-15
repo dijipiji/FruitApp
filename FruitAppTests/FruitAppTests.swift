@@ -12,6 +12,7 @@ import XCTest
 class FruitAppTests: XCTestCase {
     
     let presenter:Presenter = Presenter()
+    let defaultTimeout:Double = 5.0
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,15 +26,18 @@ class FruitAppTests: XCTestCase {
      * test passes if your Service URL is a non-URL
      */
     func testInvalidServiceURL() {
-
-        let validURL:Bool = presenter.getData(query:"this_is_not_a_url", callback:{ (data, error) -> Void in })
+        
+        // note this parses as a URL, but "this_is_an_unsupported_url" does parse - see testUnsupportedServiceURL() later
+        let myURL:String = "this is not a valid URL"
+        
+        let validURL:Bool = Service.getJSONData(query:myURL, callback: { (data, error) -> Void in })
         
         if !validURL {
             XCTAssert(true)
         } else {
             XCTAssert(false, "The Service hasn't recognised a non-URL!")
         }
-        
+
     }
 
     /**
@@ -41,7 +45,7 @@ class FruitAppTests: XCTestCase {
      */
     func testValidServiceURL() {
         
-        let validURL:Bool = presenter.getData(query:"http://bbc.com", callback:{ (data, error) -> Void in })
+        let validURL:Bool = Service.getJSONData(query:Service.baseURL, callback: { (data, error) -> Void in })
         
         if validURL {
             XCTAssert(true)
@@ -49,6 +53,69 @@ class FruitAppTests: XCTestCase {
             XCTAssert(false, "The Service hasn't recognised a valid URL!")
         }
     }
+    
+    /**
+     * test passes if your Service URL is an unsupported URL
+     */
+    func testUnsupportedServiceURL() {
+        
+        let expectation:XCTestExpectation = XCTestExpectation()
+        
+        let myURL:String = "this_is_an_unsupported_url_which_initially_parses_as_valid"
+        
+        let validURL:Bool = Service.getJSONData(query:myURL, callback: { (data, error) -> Void in
+            
+            if error != nil {
+                print("testUnsupportedServiceURL, error=\(error!.localizedDescription)")
+                XCTAssert(true)
+            } else {
+                XCTAssert(false, "The Service hasn't recognised a non-URL!")
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        if !validURL {
+            XCTAssert(true)
+        } else {
+            wait(for: [expectation], timeout: defaultTimeout)
+        }
+        
+    }
+    
+    /**
+     * test passes if your Service URL returns JSON
+     */
+    func testServiceReturnsJSON() {
+        
+        let expectation:XCTestExpectation = XCTestExpectation()
+        
+        _ = Service.getJSONData(query:Service.baseURL, callback: { (data, error) -> Void in
+            
+            if error == nil {
+                do {
+                    let json:[String : Any]? = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+                    print("json=\(String(describing: json))")
+                    XCTAssert(true)
+                } catch let error {
+                    print("error=\(error.localizedDescription)")
+                    XCTAssert(false)
+                }
+            }
+            
+            expectation.fulfill()
+
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
+        
+    }
+    
+    
+    /**
+     * test passes if your Service URL returns JSON with "fruit" base node
+     */
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
