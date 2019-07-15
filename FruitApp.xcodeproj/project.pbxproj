@@ -15,6 +15,8 @@
 		A5263D1522DC7B8D0096C492 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5263D1322DC7B8D0096C492 /* LaunchScreen.storyboard */; };
 		A5263D2022DC7B8D0096C492 /* FruitAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D1F22DC7B8D0096C492 /* FruitAppTests.swift */; };
 		A5263D2B22DC7B8D0096C492 /* FruitAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D2A22DC7B8D0096C492 /* FruitAppUITests.swift */; };
+		A5263D3922DC7E320096C492 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D3822DC7E320096C492 /* Service.swift */; };
+		A5263D3B22DC7EE70096C492 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D3A22DC7EE70096C492 /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		A5263D2622DC7B8D0096C492 /* FruitAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FruitAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5263D2A22DC7B8D0096C492 /* FruitAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitAppUITests.swift; sourceTree = "<group>"; };
 		A5263D2C22DC7B8D0096C492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5263D3822DC7E320096C492 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A5263D3A22DC7EE70096C492 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 			children = (
 				A5263D0722DC7B8B0096C492 /* AppDelegate.swift */,
 				A5263D0922DC7B8B0096C492 /* ViewController.swift */,
+				A5263D3822DC7E320096C492 /* Service.swift */,
+				A5263D3A22DC7EE70096C492 /* Presenter.swift */,
 				A5263D0B22DC7B8B0096C492 /* Main.storyboard */,
 				A5263D1122DC7B8D0096C492 /* Assets.xcassets */,
 				A5263D1322DC7B8D0096C492 /* LaunchScreen.storyboard */,
@@ -260,8 +266,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5263D0A22DC7B8B0096C492 /* ViewController.swift in Sources */,
+				A5263D3922DC7E320096C492 /* Service.swift in Sources */,
 				A5263D1022DC7B8B0096C492 /* FruitApp.xcdatamodeld in Sources */,
 				A5263D0822DC7B8B0096C492 /* AppDelegate.swift in Sources */,
+				A5263D3B22DC7EE70096C492 /* Presenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

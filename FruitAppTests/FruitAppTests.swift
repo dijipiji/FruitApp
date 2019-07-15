@@ -10,6 +10,8 @@ import XCTest
 @testable import FruitApp
 
 class FruitAppTests: XCTestCase {
+    
+    let presenter:Presenter = Presenter()
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -18,10 +20,34 @@ class FruitAppTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    /**
+     * test passes if your Service URL is a non-URL
+     */
+    func testInvalidServiceURL() {
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let validURL:Bool = presenter.getData(query:"this_is_not_a_url", callback:{ (data, error) -> Void in })
+        
+        if !validURL {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false, "The Service hasn't recognised a non-URL!")
+        }
+        
+    }
+
+    /**
+     * test passes if your Service URL is a valid URL
+     */
+    func testValidServiceURL() {
+        
+        let validURL:Bool = presenter.getData(query:"http://bbc.com", callback:{ (data, error) -> Void in })
+        
+        if validURL {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false, "The Service hasn't recognised a valid URL!")
+        }
     }
 
     func testPerformanceExample() {
