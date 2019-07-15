@@ -13,7 +13,6 @@ class Presenter: NSObject {
     let model:Model = Model()
     var ownerVC:ResultsView?
     
-    
     func getData(query:String = Service.baseURL,
                  callback:@escaping (Data?, Error?) -> Void) -> Bool {
         

@@ -12,11 +12,10 @@ class ListViewController: UIViewController {
     
     
     @IBOutlet weak var activitySpinner:UIActivityIndicatorView?
+    @IBOutlet weak var collectionView:FruitCollectionView?
+    
     let presenter:Presenter = Presenter()
     
-    let scrollView:UIScrollView = UIScrollView()
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Fruits"
@@ -47,6 +46,7 @@ class ListViewController: UIViewController {
  *
  */
 extension ListViewController: ResultsView {
+    
     
     // MARK: - Protocol methods
     /**
@@ -82,18 +82,16 @@ extension ListViewController: ResultsView {
      */
     func renderResults(_ items:[FruitEntity]?) {
         
-        guard var items:[FruitEntity] = items else {
+        guard let items:[FruitEntity] = items else {
             renderNoResults()
             return
         }
         
-        scrollView.frame = self.view.frame
-        scrollView.backgroundColor = UIColor(hexString: "#222222")
-        self.view.addSubview(scrollView)
-        
+        collectionView?.frame = self.view.frame
+        collectionView?._items = items
+        collectionView?.dataSource = collectionView
+        collectionView?.delegate = collectionView
+     
     }
 
 }
-
-
-

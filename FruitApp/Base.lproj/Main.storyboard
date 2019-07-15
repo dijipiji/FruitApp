@@ -38,25 +38,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6cu-vf-xaB">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6cu-vf-xaB">
+                                <rect key="frame" x="0.0" y="112" width="414" height="671"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vk0-KI-4mf" customClass="FruitCollectionView" customModule="FruitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="671"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Bu6-wm-Ahb">
+                                    <size key="itemSize" width="75" height="75"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyCell" id="30F-gE-Zed" customClass="MyCell" customModule="FruitApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="textLabel" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6x-RH-LVf">
+                                                    <rect key="frame" x="31" y="27" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="z6x-RH-LVf" firstAttribute="centerX" secondItem="30F-gE-Zed" secondAttribute="centerX" id="Sfr-SP-5ec"/>
+                                            <constraint firstItem="z6x-RH-LVf" firstAttribute="centerY" secondItem="30F-gE-Zed" secondAttribute="centerY" id="rjc-Yl-DAZ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="textLabel" destination="z6x-RH-LVf" id="RPe-dg-BAS"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="6cu-vf-xaB" firstAttribute="centerY" secondItem="UTs-Iv-oyz" secondAttribute="centerY" id="Cuc-kF-RxY"/>
-                            <constraint firstItem="6cu-vf-xaB" firstAttribute="centerX" secondItem="UTs-Iv-oyz" secondAttribute="centerX" id="fjP-9t-yQi"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="SMY-2g-vVs"/>
                     </view>
                     <navigationItem key="navigationItem" id="BL0-2W-sCd"/>
                     <connections>
                         <outlet property="activitySpinner" destination="6cu-vf-xaB" id="4NV-JY-gqY"/>
+                        <outlet property="collectionView" destination="vk0-KI-4mf" id="M2K-9G-cwg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Nz-PN-I1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="76"/>
+            <point key="canvasLocation" x="650.72463768115949" y="75.669642857142847"/>
         </scene>
     </scenes>
 </document>
