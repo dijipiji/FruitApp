@@ -149,6 +149,91 @@ class FruitAppTests: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
     
+    /**
+     *
+     */
+    func testJSONMatchesExpectedSchema() {
+        
+        let expectation:XCTestExpectation = XCTestExpectation()
+        
+        _ = Service.getJSONData(query:Service.baseURL, callback: { (data, error) -> Void in
+            
+            if error == nil {
+                do {
+                    let json:[String : Any]? = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+                    
+                    guard let unwrappedJSON:[String : Any] = json else {
+                        return
+                    }
+                    
+                    let myNodeName:String = "fruit"
+                    
+                    if unwrappedJSON[myNodeName] != nil {
+                        
+                        let list:[Any?] = unwrappedJSON[myNodeName] as! [Any?]
+
+                        let _:[[String:Any]?] = list.map { (item) in
+                            
+                            let itemCasted:[String:Any]? = item as? [String:Any]
+                            
+                            if itemCasted == nil { // then the schema is broken
+                                XCTAssert(false, "A node doesn't match the schema")
+                            }
+
+                            return itemCasted
+                        }
+   
+                    } else {
+                        XCTAssert(false, "The base JSON node isn't identified as \(myNodeName)")
+                    }
+                    
+                } catch let error {
+                    print("testJSONContainsFruitAsBaseNode, error=\(error.localizedDescription)")
+                    XCTAssert(false)
+                }
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
+        
+    }
+    
+    /**
+     *
+     */
+    func testModelJSONParser() {
+        let expectation:XCTestExpectation = XCTestExpectation()
+        
+        _ = Service.getJSONData(query:Service.baseURL, callback: { (data, error) -> Void in
+            
+            if error == nil {
+                do {
+                    let json:[String : Any]? = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+                    
+                    guard let unwrappedJSON:[String : Any] = json else {
+                        return
+                    }
+                    
+                    let model:Model = Model()
+                    model.parseJSONData(unwrappedJSON)
+                    XCTAssert(true)
+                    
+                } catch let error {
+                    print("testModelParser, error=\(error.localizedDescription)")
+                    XCTAssert(false)
+                }
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
+    }
+    
     
     /**
      * test passes if your Service URL returns JSON with "fruit" base node
