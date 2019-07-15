@@ -12,13 +12,9 @@ typealias FruitEntity = (type:String, price:(pounds:Int, pence:Int)?, kgWeight:D
 
 class Model: NSObject {
 
-    
-    
     func parseJSONData(_ data:[String : Any]) -> [FruitEntity]? {
         
         let list:[Any?] = data["fruit"] as! [Any?]
-        
-        //print("parseJSONData, list=\(list)")
         
         let items:[FruitEntity]? = list.map { (item) -> FruitEntity in
             
@@ -26,32 +22,38 @@ class Model: NSObject {
             let type:String = itemUnwrapped["type"] as! String? ?? "unknown"
             
             let price:(pounds:Int, pence:Int)? = penceToPoundsAndPence(itemUnwrapped["price"] as! Int?)
-            let grammes:Int? = itemUnwrapped["weight"] as! Int?
-            
-            print("type=\(type)")
-            print("price=\(price)")
-            return FruitEntity(type:type, price:price, kgWeight:0.5)
+            let kgs:Double? = gramsToKiloGrams(itemUnwrapped["weight"] as! Int?)
+  
+            return FruitEntity(type:type, price:price, kgWeight:kgs)
             
         }
         
-        
         return items
-        
         
     }
     
-    
-   
     func penceToPoundsAndPence(_ pence:Int?) -> (pounds:Int, pence:Int)? {
 
         guard let pence:Int = pence else {
             return nil
         }
         
-        let pounds:Int = Int(floor(Float(pence)/100))
+        let pounds:Int = Int(floor(Double(pence)/100))
         let remainingPence:Int = pence - (pounds*100)
         
         return (pounds:pounds, pence:remainingPence)
+    
+    }
+    
+    func gramsToKiloGrams(_ grams:Int?) -> Double? {
+        
+        guard let grams:Int = grams else {
+            return nil
+        }
+        
+        let kgs:Double = Double(grams)/1000
+        
+        return kgs
         
     }
     

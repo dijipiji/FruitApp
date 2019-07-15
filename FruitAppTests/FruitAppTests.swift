@@ -113,7 +113,7 @@ class FruitAppTests: XCTestCase {
     }
     
     /**
-     *
+     * test passes if your Service URL returns JSON with "fruit" base node
      */
     func testJSONContainsFruitAsBaseNode() {
         let expectation:XCTestExpectation = XCTestExpectation()
@@ -218,7 +218,15 @@ class FruitAppTests: XCTestCase {
                     }
                     
                     let model:Model = Model()
-                    _ = model.parseJSONData(unwrappedJSON)
+                    let items:[FruitEntity]? = model.parseJSONData(unwrappedJSON)
+                    
+                    // validate that each FruitEntity object contains data
+                    for item in items ?? [] {
+                        if item.type.count == 0 || item.price == nil || item.kgWeight == nil {
+                            XCTAssert(false)
+                        }
+                    }
+                    
                     XCTAssert(true)
                     
                 } catch let error {
@@ -234,7 +242,9 @@ class FruitAppTests: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
     }
     
-    
+    /**
+     *
+     */
     func testModelPenceToPoundsAndPence() {
         
         let model = Model()
@@ -263,14 +273,31 @@ class FruitAppTests: XCTestCase {
             XCTAssert(resultD!.pounds==1 && resultD!.pence==0)
         }
         
+    }
+    
+    /**
+     *
+     */
+    func testGramsToKiloGrams() {
+        let model = Model()
         
+        let resultA = model.gramsToKiloGrams(47)
+        
+        if resultA != nil {
+            XCTAssert(resultA! == 0.047)
+        }
+        
+        let resultB = model.gramsToKiloGrams(120)
+        
+        if resultB != nil {
+            XCTAssert(resultB! == 0.12)
+        }
     }
     
     
     /**
-     * test passes if your Service URL returns JSON with "fruit" base node
+     *
      */
-
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
