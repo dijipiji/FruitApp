@@ -27,7 +27,7 @@ class FruitAppTests: XCTestCase {
      */
     func testInvalidServiceURL() {
         
-        // note this parses as a URL, but "this_is_an_unsupported_url" does parse - see testUnsupportedServiceURL() later
+        // note this doesn't pass as a URL, but "this_is_an_unsupported_url" does pass - see testUnsupportedServiceURL() later
         let myURL:String = "this is not a valid URL"
         
         let validURL:Bool = Service.getJSONData(query:myURL, callback: { (data, error) -> Void in })
@@ -61,7 +61,7 @@ class FruitAppTests: XCTestCase {
         
         let expectation:XCTestExpectation = XCTestExpectation()
         
-        let myURL:String = "this_is_an_unsupported_url_which_initially_parses_as_valid"
+        let myURL:String = "this_is_an_unsupported_url_which_initially_passes_as_valid"
         
         let validURL:Bool = Service.getJSONData(query:myURL, callback: { (data, error) -> Void in
             
@@ -96,10 +96,10 @@ class FruitAppTests: XCTestCase {
             if error == nil {
                 do {
                     let json:[String : Any]? = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
-                    print("json=\(String(describing: json))")
+                    print("testServiceReturnsJSON, json=\(String(describing: json))")
                     XCTAssert(true)
                 } catch let error {
-                    print("error=\(error.localizedDescription)")
+                    print("testServiceReturnsJSON, error=\(error.localizedDescription)")
                     XCTAssert(false)
                 }
             }
@@ -110,6 +110,43 @@ class FruitAppTests: XCTestCase {
         
         wait(for: [expectation], timeout: defaultTimeout)
         
+    }
+    
+    /**
+     *
+     */
+    func testJSONContainsFruitAsBaseNode() {
+        let expectation:XCTestExpectation = XCTestExpectation()
+        
+        _ = Service.getJSONData(query:Service.baseURL, callback: { (data, error) -> Void in
+            
+            if error == nil {
+                do {
+                    let json:[String : Any]? = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]
+                    
+                    guard let unwrappedJSON:[String : Any] = json else {
+                        return
+                    }
+                    
+                    let myNodeName:String = "fruit"
+                    
+                    if unwrappedJSON[myNodeName] != nil {
+                        XCTAssert(true)
+                    } else {
+                        XCTAssert(false, "The base JSON node isn't identified as \(myNodeName)")
+                    }
+                    
+                } catch let error {
+                    print("testJSONContainsFruitAsBaseNode, error=\(error.localizedDescription)")
+                    XCTAssert(false)
+                }
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
     }
     
     
