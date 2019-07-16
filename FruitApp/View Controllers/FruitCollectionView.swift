@@ -39,6 +39,9 @@ class FruitCollectionView: UICollectionView,
         }
     }
     
+    func getTitleFont(_ cell:MyCell) -> UIFont {
+        return .systemFont(ofSize: cell.frame.size.width/6, weight: .regular)
+    }
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
@@ -54,14 +57,24 @@ class FruitCollectionView: UICollectionView,
         
         let cell:MyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! MyCell
         
+        cell.isHidden = false
         cell.backgroundColor = StyleSheet.cellBackgroundColor
         cell.textLabel.textColor = StyleSheet.textColor
-        cell.textLabel.text = items[indexPath.section][indexPath.row].type
+        cell.textLabel.font = getTitleFont(cell)
+        
+        
+        if indexPath.row < items[indexPath.section].count {
+            cell.textLabel.text = items[indexPath.section][indexPath.row].type
+        } else {
+            cell.isHidden = true
+        }
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc:SingleItemViewController = SingleItemViewController()
+        vc.render(item:items[indexPath.section][indexPath.row])
         self.listViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -70,11 +83,11 @@ class FruitCollectionView: UICollectionView,
                                  sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let collectionViewFlowLayout:UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
-            let sq:CGFloat = floor(self.frame.size.width/3)
+            let sq:CGFloat = floor(self.frame.size.width/CGFloat(columnNumber))
             return CGSize(width:sq,height:sq)
         }
         
-        let sq:CGFloat = floor(self.frame.size.width/3)-(collectionViewFlowLayout.sectionInset.left+collectionViewFlowLayout.sectionInset.right)
+        let sq:CGFloat = floor(self.frame.size.width/CGFloat(columnNumber))-(collectionViewFlowLayout.sectionInset.left+collectionViewFlowLayout.sectionInset.right)
         return CGSize(width:sq,height:sq)
     }
     

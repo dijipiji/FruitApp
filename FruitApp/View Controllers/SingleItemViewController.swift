@@ -15,6 +15,59 @@ class SingleItemViewController: BaseViewController {
         self.navigationItem.title = "Fruit"
     }
     
+    func render(item:FruitEntity) {
+        
+        let baseFontSize:CGFloat = self.view.frame.size.width / 8
+        
+        let titleLabel:UILabel = UILabel(frame:CGRect(x:0,y:100,
+                                                 width:self.view.frame.size.width,
+                                                 height:baseFontSize*2))
+        titleLabel.font = .systemFont(ofSize: baseFontSize, weight: .bold)
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = StyleSheet.textColor
+        titleLabel.text = item.type
+        
+        self.view.addSubview(titleLabel)
+        
+        
+        let priceLabel:UILabel = UILabel(frame:CGRect(x:0,y:titleLabel.frame.origin.y+titleLabel.frame.size.height,
+                                                 width:self.view.frame.size.width,
+                                                 height:baseFontSize*2))
+        priceLabel.font = .systemFont(ofSize: baseFontSize-10.0, weight: .regular)
+        priceLabel.textAlignment = .center
+        priceLabel.textColor = StyleSheet.textColor
+        
+        var priceText:String = ""
+        if item.price == nil {
+            priceText = "Price unknown"
+        } else {
+            priceText = CurrencyPrinter.getPrintablePoundsAndPence(price:item.price!)
+        }
+        
+        priceLabel.text = priceText
+        
+        self.view.addSubview(priceLabel)
+        
+        
+        let weightLabel:UILabel = UILabel(frame:CGRect(x:0,y:priceLabel.frame.origin.y+priceLabel.frame.size.height,
+                                                 width:self.view.frame.size.width,
+                                                 height:baseFontSize*2))
+        weightLabel.font = .systemFont(ofSize: baseFontSize-15.0, weight: .regular)
+        weightLabel.textAlignment = .center
+        weightLabel.textColor = StyleSheet.textColor
+        
+        var weightText:String = ""
+        if item.kgWeight == nil {
+            weightText = "Weight unknown"
+        } else {
+            weightText = "\(item.kgWeight!) kg"
+        }
+        
+        weightLabel.text = weightText
+        
+        self.view.addSubview(weightLabel)
+    }
+    
 
 
 }

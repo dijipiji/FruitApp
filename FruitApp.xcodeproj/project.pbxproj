@@ -23,6 +23,7 @@
 		A5263D4922DCCFFB0096C492 /* FruitCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4822DCCFFB0096C492 /* FruitCollectionView.swift */; };
 		A5263D4B22DDC1290096C492 /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4A22DDC1290096C492 /* StyleSheet.swift */; };
 		A5263D4D22DDC63A0096C492 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4C22DDC63A0096C492 /* BaseViewController.swift */; };
+		A5263D5122DDCB8A0096C492 /* CurrencyPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		A5263D4822DCCFFB0096C492 /* FruitCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCollectionView.swift; sourceTree = "<group>"; };
 		A5263D4A22DDC1290096C492 /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
 		A5263D4C22DDC63A0096C492 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPrinter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			children = (
 				A5263D4A22DDC1290096C492 /* StyleSheet.swift */,
 				A5263D4022DCC3940096C492 /* UIColor+Extension.swift */,
+				A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				A5263D4B22DDC1290096C492 /* StyleSheet.swift in Sources */,
 				A5263D3B22DC7EE70096C492 /* Presenter.swift in Sources */,
 				A5263D4122DCC3940096C492 /* UIColor+Extension.swift in Sources */,
+				A5263D5122DDCB8A0096C492 /* CurrencyPrinter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
