@@ -316,15 +316,76 @@ class FruitAppTests: XCTestCase {
         
     }
     
+    /**
+     *
+     */
+    func testStatsLogger_Load() {
+        let expectation:XCTestExpectation = XCTestExpectation()
+        let milliseconds:Int = 2000
+        
+        _ = Service.sendStats(event:Service.StatType.LOAD, data:milliseconds, callback:{ (data, error) -> Void in
+            
+            if error == nil {
+                XCTAssert(true)
+            } else {
+                XCTAssert(false)
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
+        
+    }
     
     /**
      *
      */
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testStatsLogger_Display() {
+        let expectation:XCTestExpectation = XCTestExpectation()
+        let milliseconds:Int = 2000
+        
+        _ = Service.sendStats(event:Service.StatType.DISPLAY, data:milliseconds, callback:{ (data, error) -> Void in
+            
+            if error == nil {
+                XCTAssert(true)
+            } else {
+                XCTAssert(false)
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
+        
     }
+    
+    
+    
+    /**
+     *
+     */
+    func testStatsLogger_Error() {
+        let expectation:XCTestExpectation = XCTestExpectation()
+        let description:String = "Application crashed at line 349 of FruitAppTests.swift"
+        
+        _ = Service.sendStats(event:Service.StatType.ERROR, data:description, callback:{ (data, error) -> Void in
+            
+            if error == nil {
+                XCTAssert(true)
+            } else {
+                XCTAssert(false)
+            }
+            
+            expectation.fulfill()
+            
+        })
+        
+        wait(for: [expectation], timeout: defaultTimeout)
+        
+    }
+
 
 }

@@ -37,6 +37,8 @@ class ListViewController: BaseViewController {
 
         super.render()
         
+        eventLogger.startDate = Date()
+        
         collectionView?.collectionViewLayout.invalidateLayout()
         activitySpinner?.frame = self.view.frame
 
@@ -44,7 +46,6 @@ class ListViewController: BaseViewController {
             _ = self.presenter.presentData(data,error)
         })
     }
-    
     
 }
 
@@ -85,18 +86,15 @@ extension ListViewController: ResultsView {
         lbl.text = "There are no results available"
         lbl.textAlignment = .center
         self.view.addSubview(lbl)
+        
+        renderComplete()
     }
     
     /**
      *
      */
-    func renderResults(_ items:[FruitEntity]?) {
+    func renderResults(_ items:[FruitEntity]) {
         
-        guard let items:[FruitEntity] = items else {
-            renderNoResults()
-            return
-        }
-
         collectionView?.frame = self.view.frame
         collectionView?.setItemsForCollectionFlowLayout(items)
         collectionView?.dataSource = collectionView
@@ -104,7 +102,10 @@ extension ListViewController: ResultsView {
         
         // this ensures that cached cells also update their display on an orientation change
         collectionView?.updateCellDisplay()
+        
+        renderComplete()
      
     }
+    
 
 }

@@ -24,6 +24,7 @@
 		A5263D4B22DDC1290096C492 /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4A22DDC1290096C492 /* StyleSheet.swift */; };
 		A5263D4D22DDC63A0096C492 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4C22DDC63A0096C492 /* BaseViewController.swift */; };
 		A5263D5122DDCB8A0096C492 /* CurrencyPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */; };
+		A5263D5322DDF7350096C492 /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5222DDF7350096C492 /* EventLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		A5263D4A22DDC1290096C492 /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
 		A5263D4C22DDC63A0096C492 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPrinter.swift; sourceTree = "<group>"; };
+		A5263D5222DDF7350096C492 /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				A5263D4A22DDC1290096C492 /* StyleSheet.swift */,
+				A5263D5222DDF7350096C492 /* EventLogger.swift */,
 				A5263D4022DCC3940096C492 /* UIColor+Extension.swift */,
 				A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */,
 			);
@@ -304,6 +307,7 @@
 			files = (
 				A5263D0A22DC7B8B0096C492 /* ListViewController.swift in Sources */,
 				A5263D3922DC7E320096C492 /* Service.swift in Sources */,
+				A5263D5322DDF7350096C492 /* EventLogger.swift in Sources */,
 				A5263D4D22DDC63A0096C492 /* BaseViewController.swift in Sources */,
 				A5263D3F22DCBDBF0096C492 /* SingleItemViewController.swift in Sources */,
 				A5263D4922DCCFFB0096C492 /* FruitCollectionView.swift in Sources */,

@@ -11,10 +11,15 @@ import UIKit
 class Presenter: NSObject {
 
     fileprivate let model:Model = Model()
+    fileprivate let eventLogger:EventLogger = EventLogger()
     public var ownerVC:ResultsView?
     
     func getData(query:String = Service.baseURL,
                  callback:@escaping (Data?, Error?) -> Void) -> Bool {
+        
+        print("--->Presenter.getData")
+        
+        eventLogger.startDate = Date()
         
         if ownerVC != nil {
             ownerVC!.startLoading()
@@ -30,6 +35,8 @@ class Presenter: NSObject {
     
     func presentData(_ data:Data?, _ error:Error?) -> [FruitEntity]? {
      
+        print("--->Presenter.presentData")
+        
         guard let data:Data = data else {
             return nil
         }
@@ -37,7 +44,7 @@ class Presenter: NSObject {
         if data.count == 0 || error != nil {
      
             DispatchQueue.main.async {
-                self.searchComplete()
+                self.dataReady()
             }
      
             return nil
@@ -46,7 +53,7 @@ class Presenter: NSObject {
         let items:[FruitEntity]? = model.parseJSONData(model.dataToJSON(data)!)
      
         DispatchQueue.main.async {
-            self.searchComplete(items)
+            self.dataReady(items)
         }
      
         return items
@@ -54,10 +61,12 @@ class Presenter: NSObject {
     }
     
     
-    func searchComplete(_ items:[FruitEntity]? = nil) {
+    func dataReady(_ items:[FruitEntity]? = nil) {
+        print("--->Presenter.dataReady")
+        eventLogger.endDate = Date()
+        eventLogger.sendLoadEvent()
         
-        
-        // force a delay as loads can be so quick you don't get a sense that the activity spinner was animating
+        // forcing a small delay because loads can be so quick you don't get a sense that the activity spinner was even animating
         _ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(presentResults (_ :)), userInfo: items, repeats: false)
         
     }
@@ -72,12 +81,12 @@ class Presenter: NSObject {
         
         ownerVC.finishLoading()
         
-        print("--->Presenter.searchComplete")
+        print("--->Presenter.presentResults")
         
         if items == nil {
             ownerVC.renderNoResults()
         } else {
-            ownerVC.renderResults(items)
+            ownerVC.renderResults(items!)
         }
         
     }
@@ -102,5 +111,5 @@ protocol ResultsView: NSObjectProtocol {
     func startLoading()
     func finishLoading()
     func renderNoResults()
-    func renderResults(_ items:[FruitEntity]?)
+    func renderResults(_ items:[FruitEntity])
 }

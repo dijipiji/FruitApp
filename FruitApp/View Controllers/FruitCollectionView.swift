@@ -85,8 +85,8 @@ class FruitCollectionView: UICollectionView,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc:SingleItemViewController = SingleItemViewController()
+        vc.eventLogger.startDate = Date()
         vc.item = items[indexPath.section][indexPath.row]
-        vc.render()
         self.listViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

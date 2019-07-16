@@ -27,6 +27,8 @@ class Model: NSObject {
 
     func parseJSONData(_ json:[String : Any]) -> [FruitEntity]? {
         
+        print("--->Model.parseJSONData")
+        
         let list:[Any?] = json["fruit"] as! [Any?]
         
         let items:[FruitEntity]? = list.map { (item) -> FruitEntity in

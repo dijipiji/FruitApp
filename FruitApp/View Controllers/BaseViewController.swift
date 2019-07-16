@@ -9,10 +9,12 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    let eventLogger:EventLogger = EventLogger()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationController?.navigationBar.barTintColor = StyleSheet.barBackgroundColor
         self.navigationController?.navigationBar.tintColor = StyleSheet.textColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:StyleSheet.textColor]
@@ -33,6 +35,11 @@ class BaseViewController: UIViewController {
      */
     func render() {
         
+    }
+    
+    func renderComplete() {
+        eventLogger.endDate = Date()
+        eventLogger.sendDisplayEvent()
     }
     
 }

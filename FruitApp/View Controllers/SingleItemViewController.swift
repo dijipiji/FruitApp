@@ -13,14 +13,24 @@ class SingleItemViewController: BaseViewController {
     public var item:FruitEntity?
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         self.navigationItem.title = "Fruit"
+        self.view.backgroundColor = StyleSheet.cellBackgroundColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        render()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        renderComplete()
     }
     
     override func render() {
-        
+
         // Guard unwrap to ensure we have an item available to render
         guard let item:FruitEntity = item else {
+            
             return
         }
         
@@ -83,8 +93,7 @@ class SingleItemViewController: BaseViewController {
         weightLabel.text = weightText
         
         self.view.addSubview(weightLabel)
+  
     }
-    
-
 
 }
