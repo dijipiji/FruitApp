@@ -32,6 +32,12 @@ class Service: NSObject {
         
         session.dataTask(with: myURL) {
             (data, response, error) in
+            
+            if error != nil {
+                Service.sendStats(event:Service.StatType.ERROR,
+                                  data:"Service:\(#function) line:\(#line), the URLSession is returning an error",
+                                  callback:{ (data, error) -> Void in })
+            }
 
             callback(data, error)
             session.finishTasksAndInvalidate()

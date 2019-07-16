@@ -53,7 +53,7 @@ class ListViewController: BaseViewController {
 /**
  *
  */
-extension ListViewController: ResultsView {
+extension ListViewController: ResultsViewController {
     
     
     // MARK: - Protocol methods

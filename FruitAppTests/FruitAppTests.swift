@@ -362,14 +362,12 @@ class FruitAppTests: XCTestCase {
         
     }
     
-    
-    
     /**
      *
      */
     func testStatsLogger_Error() {
         let expectation:XCTestExpectation = XCTestExpectation()
-        let description:String = "Application crashed at line 349 of FruitAppTests.swift"
+        let description:String = "Application crashed at line \(#line), function \(#function) of \(#file)"
         
         _ = Service.sendStats(event:Service.StatType.ERROR, data:description, callback:{ (data, error) -> Void in
             
@@ -386,6 +384,7 @@ class FruitAppTests: XCTestCase {
         wait(for: [expectation], timeout: defaultTimeout)
         
     }
+    
 
 
 }

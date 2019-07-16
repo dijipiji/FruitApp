@@ -30,7 +30,7 @@ class SingleItemViewController: BaseViewController {
 
         // Guard unwrap to ensure we have an item available to render
         guard let item:FruitEntity = item else {
-            
+            eventLogger.sendErrorEvent(errorDescription:"SingleItemViewController:\(#function) line:\(#line), there is no item to render")
             return
         }
         

@@ -12,7 +12,7 @@ class Presenter: NSObject {
 
     fileprivate let model:Model = Model()
     fileprivate let eventLogger:EventLogger = EventLogger()
-    public var ownerVC:ResultsView?
+    public var ownerVC:ResultsViewController?
     
     func getData(query:String = Service.baseURL,
                  callback:@escaping (Data?, Error?) -> Void) -> Bool {
@@ -36,8 +36,9 @@ class Presenter: NSObject {
     func presentData(_ data:Data?, _ error:Error?) -> [FruitEntity]? {
      
         print("--->Presenter.presentData")
-        
+
         guard let data:Data = data else {
+            eventLogger.sendErrorEvent(errorDescription:"Presenter:\(#function) line:\(#line), there is no data")
             return nil
         }
      
@@ -76,6 +77,7 @@ class Presenter: NSObject {
         let items:[FruitEntity]? = timer.userInfo as? [FruitEntity]
         
         guard let ownerVC = ownerVC else {
+            eventLogger.sendErrorEvent(errorDescription:"Presenter:\(#function) line:\(#line), there is no owner view controller to present to!")
             return
         }
         
@@ -92,7 +94,7 @@ class Presenter: NSObject {
     }
     
 
-    func attachVC(_ vc:ResultsView) {
+    func attachVC(_ vc:ResultsViewController) {
         ownerVC = vc
     }
     
@@ -107,7 +109,7 @@ class Presenter: NSObject {
 /**
  *
  */
-protocol ResultsView: NSObjectProtocol {
+protocol ResultsViewController: NSObjectProtocol {
     func startLoading()
     func finishLoading()
     func renderNoResults()

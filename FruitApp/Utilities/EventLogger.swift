@@ -20,7 +20,7 @@ class EventLogger: NSObject {
             let millisecondDiff:Int = Int(secondDiff * 1000)
             return millisecondDiff
         }
-        
+ 
         return 0
         
     }
@@ -29,7 +29,7 @@ class EventLogger: NSObject {
         let milliseconds:Int = getMillisecondsBetweenDates()
         
         if milliseconds == 0 {
-            sendErrorEvent(errorDescription:"Load event has no start date & end date, or there is no time difference between dates")
+            sendErrorEvent(errorDescription:"EventLogger:\(#function) line:\(#line), event has no start date & end date, or there is no time difference between dates")
         } else {
             Service.sendStats(event:Service.StatType.LOAD, data:milliseconds, callback:{ (data, error) -> Void in
                 
@@ -42,7 +42,7 @@ class EventLogger: NSObject {
         let milliseconds:Int = getMillisecondsBetweenDates()
         
         if milliseconds == 0 {
-            sendErrorEvent(errorDescription:"Display event has no start date & end date, or there is no time difference between dates")
+            sendErrorEvent(errorDescription:"EventLogger:\(#function) line:\(#line), event has no start date & end date, or there is no time difference between dates")
         } else {
             Service.sendStats(event:Service.StatType.DISPLAY, data:milliseconds, callback:{ (data, error) -> Void in
                 
