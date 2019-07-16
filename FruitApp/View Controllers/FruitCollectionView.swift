@@ -22,7 +22,7 @@ class FruitCollectionView: UICollectionView,
     @IBOutlet weak var listViewController:ListViewController?
     
     fileprivate var columnNumber:Int = 3
-    public var items:[[FruitEntity]] = []
+    fileprivate var items:[[FruitEntity]] = []
     
     /**
      * The items need to be stored in a double array structure to match the row/column data referencing
@@ -39,8 +39,20 @@ class FruitCollectionView: UICollectionView,
         }
     }
     
-    func getTitleFont(_ cell:MyCell) -> UIFont {
-        return .systemFont(ofSize: cell.frame.size.width/6, weight: .regular)
+    func updateCellDisplay() {
+        self.visibleCells.forEach { cell in
+            guard let cell = cell as? MyCell else {
+                return
+            }
+            
+            cell.textLabel.font = getTitleFont()
+            
+        }
+    }
+    
+    func getTitleFont() -> UIFont {
+        let sq:CGFloat = floor(self.frame.size.width/CGFloat(columnNumber))
+        return .systemFont(ofSize: sq/6, weight: .regular)
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -60,8 +72,7 @@ class FruitCollectionView: UICollectionView,
         cell.isHidden = false
         cell.backgroundColor = StyleSheet.cellBackgroundColor
         cell.textLabel.textColor = StyleSheet.textColor
-        cell.textLabel.font = getTitleFont(cell)
-        
+        cell.textLabel.font = getTitleFont()
         
         if indexPath.row < items[indexPath.section].count {
             cell.textLabel.text = items[indexPath.section][indexPath.row].type
@@ -74,7 +85,8 @@ class FruitCollectionView: UICollectionView,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc:SingleItemViewController = SingleItemViewController()
-        vc.render(item:items[indexPath.section][indexPath.row])
+        vc.item = items[indexPath.section][indexPath.row]
+        vc.render()
         self.listViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

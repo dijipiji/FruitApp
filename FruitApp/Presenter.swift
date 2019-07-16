@@ -16,6 +16,10 @@ class Presenter: NSObject {
     func getData(query:String = Service.baseURL,
                  callback:@escaping (Data?, Error?) -> Void) -> Bool {
         
+        if ownerVC != nil {
+            ownerVC!.startLoading()
+        }
+        
         let validURL:Bool = Service.getJSONData(query:query, callback: { (data, error) -> Void in
             callback(data, error)
         })
@@ -51,17 +55,31 @@ class Presenter: NSObject {
     
     
     func searchComplete(_ items:[FruitEntity]? = nil) {
+        
+        
+        // force a delay as loads can be so quick you don't get a sense that the activity spinner was animating
+        _ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(presentResults (_ :)), userInfo: items, repeats: false)
+        
+    }
+    
+    @objc func presentResults(_ timer:Timer) {
+        
+        let items:[FruitEntity]? = timer.userInfo as? [FruitEntity]
+        
         guard let ownerVC = ownerVC else {
             return
         }
         
         ownerVC.finishLoading()
         
+        print("--->Presenter.searchComplete")
+        
         if items == nil {
             ownerVC.renderNoResults()
         } else {
             ownerVC.renderResults(items)
         }
+        
     }
     
 

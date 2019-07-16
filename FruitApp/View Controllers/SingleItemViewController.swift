@@ -9,17 +9,34 @@
 import UIKit
 
 class SingleItemViewController: BaseViewController {
-
+    
+    public var item:FruitEntity?
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         self.navigationItem.title = "Fruit"
     }
     
-    func render(item:FruitEntity) {
+    override func render() {
         
-        let baseFontSize:CGFloat = self.view.frame.size.width / 8
+        // Guard unwrap to ensure we have an item available to render
+        guard let item:FruitEntity = item else {
+            return
+        }
         
-        let titleLabel:UILabel = UILabel(frame:CGRect(x:0,y:100,
+        super.render()
+        
+        for v in self.view.subviews {
+            v.removeFromSuperview()
+        }
+        
+        var baseFontSize:CGFloat = self.view.frame.size.width / 8
+        
+        if self.view.frame.size.width > self.view.frame.size.height {
+            baseFontSize = self.view.frame.size.height / 8
+        }
+        
+        let titleLabel:UILabel = UILabel(frame:CGRect(x:0,y:80,
                                                  width:self.view.frame.size.width,
                                                  height:baseFontSize*2))
         titleLabel.font = .systemFont(ofSize: baseFontSize, weight: .bold)

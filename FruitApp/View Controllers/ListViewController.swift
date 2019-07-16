@@ -20,22 +20,32 @@ class ListViewController: BaseViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Fruits"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reload(_:)))
         presenter.attachVC(self)
         
+        render()
+    }
+    
+    @objc func reload(_ btn:UIBarButtonItem) {
+        render()
+    }
+    
+    /**
+     * First we purge any displayed view and then add them back on to the hierarchy
+     */
+    override func render() {
+
+        super.render()
+        
+        collectionView?.collectionViewLayout.invalidateLayout()
+        activitySpinner?.frame = self.view.frame
+
         _ = presenter.getData(callback:{ (data, error) -> Void in
             _ = self.presenter.presentData(data,error)
         })
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
     
-    @objc func itemPressed(_ btn:UIButton) {
-        let vc:SingleItemViewController = SingleItemViewController()
-        self.navigationController!.pushViewController(vc, animated: true)
-    }
-
 }
 
 
@@ -50,6 +60,8 @@ extension ListViewController: ResultsView {
      *
      */
     func startLoading() {
+        collectionView?.isHidden = true
+        activitySpinner?.isHidden = false
         activitySpinner?.startAnimating()
     }
     
@@ -57,8 +69,9 @@ extension ListViewController: ResultsView {
      *
      */
     func finishLoading() {
+        collectionView?.isHidden = false
         activitySpinner?.stopAnimating()
-        activitySpinner?.removeFromSuperview()
+        activitySpinner?.isHidden = true
     }
     
     /**
@@ -83,11 +96,14 @@ extension ListViewController: ResultsView {
             renderNoResults()
             return
         }
-        
+
         collectionView?.frame = self.view.frame
         collectionView?.setItemsForCollectionFlowLayout(items)
         collectionView?.dataSource = collectionView
         collectionView?.delegate = collectionView
+        
+        // this ensures that cached cells also update their display on an orientation change
+        collectionView?.updateCellDisplay()
      
     }
 
