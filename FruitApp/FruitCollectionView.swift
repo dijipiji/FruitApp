@@ -19,58 +19,55 @@ class FruitCollectionView: UICollectionView,
                            UICollectionViewDataSource,
                            UICollectionViewDelegateFlowLayout {
     
+    fileprivate var columnNumber:Int = 3
+    public var items:[[FruitEntity]] = []
     
-    var _items:[FruitEntity] = []
+    /**
+     * The items need to be stored in a double array structure to match the row/column data referencing
+     */
+    func setItemsForCollectionFlowLayout(_ items:[FruitEntity]) {
+        _ = items.enumerated().map { [unowned self] (index, item) in
+
+            if index%columnNumber == 0 {
+                self.items.append([])
+            }
+            
+            self.items[self.items.count-1].append(item)
+
+        }
+    }
     
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        
-        //let sq:CGFloat = self.frame.size.width/3
-        
-        //return Int(floor(self.frame.size.width/sq))
-        
-        
-        return 3
+        return columnNumber
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("_items.count=\(_items.count)")
-        return Int(ceil(Double(_items.count)/3))
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell:MyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! MyCell
-
-        //cell.frame.size = CGSize(width:self.frame.size.width/3, height:cell.frame.size.height)
-        cell.textLabel.text = "sec:\(indexPath.section), row:\(indexPath.row)"
+        
+        cell.backgroundColor = StyleSheet.cellBackgroundColor
+        cell.textLabel.textColor = StyleSheet.white
+        cell.textLabel.text = items[indexPath.section][indexPath.row].type
         return cell
-        
-
     }
-    
-    /*
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        
-        let totalCellWidth = 100 * 3
-        let totalSpacingWidth = 5 * (3 - 1)
-        
-        let leftInset = (self.frame.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
-        let rightInset = leftInset
-        
-        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
-    }*/
     
     func collectionView(_ collectionView: UICollectionView,
                                  layout collectionViewLayout: UICollectionViewLayout,
                                  sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let sq:CGFloat = floor(self.frame.size.width/3)
+        guard let collectionViewFlowLayout:UICollectionViewFlowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            let sq:CGFloat = floor(self.frame.size.width/3)
+            return CGSize(width:sq,height:sq)
+        }
         
-        print("sq=\(sq)")
-        
+        let sq:CGFloat = floor(self.frame.size.width/3)-(collectionViewFlowLayout.sectionInset.left+collectionViewFlowLayout.sectionInset.right)
         return CGSize(width:sq,height:sq)
     }
     

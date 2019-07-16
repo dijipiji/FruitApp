@@ -22,6 +22,7 @@
 		A5263D4122DCC3940096C492 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4022DCC3940096C492 /* UIColor+Extension.swift */; };
 		A5263D4322DCCCC50096C492 /* FruitCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4222DCCCC50096C492 /* FruitCellView.swift */; };
 		A5263D4922DCCFFB0096C492 /* FruitCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4822DCCFFB0096C492 /* FruitCollectionView.swift */; };
+		A5263D4B22DDC1290096C492 /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4A22DDC1290096C492 /* StyleSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		A5263D4022DCC3940096C492 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A5263D4222DCCCC50096C492 /* FruitCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCellView.swift; sourceTree = "<group>"; };
 		A5263D4822DCCFFB0096C492 /* FruitCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCollectionView.swift; sourceTree = "<group>"; };
+		A5263D4A22DDC1290096C492 /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				A5263D0722DC7B8B0096C492 /* AppDelegate.swift */,
 				A5263D0922DC7B8B0096C492 /* ListViewController.swift */,
 				A5263D4822DCCFFB0096C492 /* FruitCollectionView.swift */,
+				A5263D4A22DDC1290096C492 /* StyleSheet.swift */,
 				A5263D4222DCCCC50096C492 /* FruitCellView.swift */,
 				A5263D3E22DCBDBF0096C492 /* SingleItemViewController.swift */,
 				A5263D3822DC7E320096C492 /* Service.swift */,
@@ -287,6 +290,7 @@
 				A5263D1022DC7B8B0096C492 /* FruitApp.xcdatamodeld in Sources */,
 				A5263D3D22DC94830096C492 /* Model.swift in Sources */,
 				A5263D0822DC7B8B0096C492 /* AppDelegate.swift in Sources */,
+				A5263D4B22DDC1290096C492 /* StyleSheet.swift in Sources */,
 				A5263D3B22DC7EE70096C492 /* Presenter.swift in Sources */,
 				A5263D4322DCCCC50096C492 /* FruitCellView.swift in Sources */,
 				A5263D4122DCC3940096C492 /* UIColor+Extension.swift in Sources */,

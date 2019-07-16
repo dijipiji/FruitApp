@@ -14,10 +14,15 @@ class ListViewController: UIViewController {
     @IBOutlet weak var activitySpinner:UIActivityIndicatorView?
     @IBOutlet weak var collectionView:FruitCollectionView?
     
-    let presenter:Presenter = Presenter()
+    fileprivate let presenter:Presenter = Presenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = StyleSheet.barBackgroundColor
+        self.navigationController?.navigationBar.tintColor = StyleSheet.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:StyleSheet.white]
+        
         self.navigationItem.title = "Fruits"
         presenter.attachVC(self)
         
@@ -33,10 +38,6 @@ class ListViewController: UIViewController {
     @objc func itemPressed(_ btn:UIButton) {
         let vc:SingleItemViewController = SingleItemViewController()
         self.navigationController!.pushViewController(vc, animated: true)
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
     }
 
 }
@@ -88,7 +89,7 @@ extension ListViewController: ResultsView {
         }
         
         collectionView?.frame = self.view.frame
-        collectionView?._items = items
+        collectionView?.setItemsForCollectionFlowLayout(items)
         collectionView?.dataSource = collectionView
         collectionView?.delegate = collectionView
      
