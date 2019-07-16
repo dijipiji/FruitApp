@@ -77,6 +77,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="listViewController" destination="rKg-hL-I0T" id="fPZ-Hc-MRP"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,7 +88,7 @@
                     <navigationItem key="navigationItem" id="BL0-2W-sCd"/>
                     <connections>
                         <outlet property="activitySpinner" destination="6cu-vf-xaB" id="4NV-JY-gqY"/>
-                        <outlet property="collectionView" destination="vk0-KI-4mf" id="M2K-9G-cwg"/>
+                        <outlet property="collectionView" destination="vk0-KI-4mf" id="ZL9-oz-dqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Nz-PN-I1M" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: BaseViewController {
     
     
     @IBOutlet weak var activitySpinner:UIActivityIndicatorView?
@@ -18,10 +18,6 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.barTintColor = StyleSheet.barBackgroundColor
-        self.navigationController?.navigationBar.tintColor = StyleSheet.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:StyleSheet.white]
         
         self.navigationItem.title = "Fruits"
         presenter.attachVC(self)

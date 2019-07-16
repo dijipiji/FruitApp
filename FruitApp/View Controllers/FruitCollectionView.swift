@@ -19,6 +19,8 @@ class FruitCollectionView: UICollectionView,
                            UICollectionViewDataSource,
                            UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var listViewController:ListViewController?
+    
     fileprivate var columnNumber:Int = 3
     public var items:[[FruitEntity]] = []
     
@@ -53,9 +55,14 @@ class FruitCollectionView: UICollectionView,
         let cell:MyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! MyCell
         
         cell.backgroundColor = StyleSheet.cellBackgroundColor
-        cell.textLabel.textColor = StyleSheet.white
+        cell.textLabel.textColor = StyleSheet.textColor
         cell.textLabel.text = items[indexPath.section][indexPath.row].type
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc:SingleItemViewController = SingleItemViewController()
+        self.listViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView,
