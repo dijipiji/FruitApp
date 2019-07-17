@@ -14,7 +14,7 @@ class SingleItemViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Fruit"
+        self.navigationItem.title = "SINGLE_ITEM_TITLE".localized()
         self.view.backgroundColor = StyleSheet.cellBackgroundColor
     }
     
@@ -66,7 +66,7 @@ class SingleItemViewController: BaseViewController {
         
         var priceText:String = ""
         if item.price == nil {
-            priceText = "Price unknown"
+            priceText = "PRICE_UNKNOWN".localized()
         } else {
             priceText = CurrencyPrinter.getPrintablePoundsAndPence(price:item.price!)
         }
@@ -85,9 +85,9 @@ class SingleItemViewController: BaseViewController {
         
         var weightText:String = ""
         if item.kgWeight == nil {
-            weightText = "Weight unknown"
+            weightText = "WEIGHT_UNKNOWN".localized()
         } else {
-            weightText = "\(item.kgWeight!) kg"
+            weightText = "\(item.kgWeight!) \("KILOGRAM_UNIT".localized())"
         }
         
         weightLabel.text = weightText

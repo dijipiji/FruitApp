@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  FruitApp
+
+  Created by Jamie Lemon on 17/07/2019.
+  Copyright © 2019 dijipiji. All rights reserved.
+*/
+
+"LIST_TITLE" = "Fruits";
+"SINGLE_ITEM_TITLE" = "Fruit";
+"NO_RESULTS" = "There are no results available";
+"PRICE_UNKNOWN" = "Price unknown";
+"WEIGHT_UNKNOWN" = "Weight unknown";
+"KILOGRAM_UNIT" = "kg";
+

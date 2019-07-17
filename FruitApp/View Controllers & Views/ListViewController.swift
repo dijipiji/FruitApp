@@ -18,7 +18,7 @@ class ListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Fruits"
+        self.navigationItem.title = "LIST_TITLE".localized()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reload(_:)))
         presenter.attachVC(self)
         
@@ -109,7 +109,7 @@ extension ListViewController: ResultsViewController {
                                                 width:self.view.frame.size.width,
                                                 height:self.view.frame.size.height))
         lbl.textColor = .white
-        lbl.text = "There are no results available"
+        lbl.text = "NO_RESULTS".localized()
         lbl.textAlignment = .center
         self.view.addSubview(lbl)
         

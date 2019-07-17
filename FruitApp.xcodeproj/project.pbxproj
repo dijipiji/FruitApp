@@ -26,6 +26,8 @@
 		A5263D5122DDCB8A0096C492 /* CurrencyPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */; };
 		A5263D5322DDF7350096C492 /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5222DDF7350096C492 /* EventLogger.swift */; };
 		A5263D5522DF00B90096C492 /* ZoomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5422DF00B90096C492 /* ZoomComponent.swift */; };
+		A5263D6822DF0ED70096C492 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5263D6A22DF0ED70096C492 /* Localizable.strings */; };
+		A5263D6C22DF0F850096C492 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D6B22DF0F850096C492 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPrinter.swift; sourceTree = "<group>"; };
 		A5263D5222DDF7350096C492 /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
 		A5263D5422DF00B90096C492 /* ZoomComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomComponent.swift; sourceTree = "<group>"; };
+		A5263D6922DF0ED70096C492 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5263D6B22DF0F850096C492 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,10 +132,11 @@
 				A5263D3C22DC94830096C492 /* Model.swift */,
 				A5263D4F22DDC7140096C492 /* Utilities */,
 				A5263D0B22DC7B8B0096C492 /* Main.storyboard */,
-				A5263D1122DC7B8D0096C492 /* Assets.xcassets */,
 				A5263D1322DC7B8D0096C492 /* LaunchScreen.storyboard */,
 				A5263D1622DC7B8D0096C492 /* Info.plist */,
+				A5263D1122DC7B8D0096C492 /* Assets.xcassets */,
 				A5263D0E22DC7B8B0096C492 /* FruitApp.xcdatamodeld */,
+				A5263D6A22DF0ED70096C492 /* Localizable.strings */,
 			);
 			path = FruitApp;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 				A5263D4A22DDC1290096C492 /* StyleSheet.swift */,
 				A5263D5222DDF7350096C492 /* EventLogger.swift */,
 				A5263D4022DCC3940096C492 /* UIColor+Extension.swift */,
+				A5263D6B22DF0F850096C492 /* String+Extension.swift */,
 				A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */,
 			);
 			path = Utilities;
@@ -282,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5263D1522DC7B8D0096C492 /* LaunchScreen.storyboard in Resources */,
+				A5263D6822DF0ED70096C492 /* Localizable.strings in Resources */,
 				A5263D1222DC7B8D0096C492 /* Assets.xcassets in Resources */,
 				A5263D0D22DC7B8B0096C492 /* Main.storyboard in Resources */,
 			);
@@ -321,6 +328,7 @@
 				A5263D4B22DDC1290096C492 /* StyleSheet.swift in Sources */,
 				A5263D3B22DC7EE70096C492 /* Presenter.swift in Sources */,
 				A5263D4122DCC3940096C492 /* UIColor+Extension.swift in Sources */,
+				A5263D6C22DF0F850096C492 /* String+Extension.swift in Sources */,
 				A5263D5122DDCB8A0096C492 /* CurrencyPrinter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +381,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		A5263D6A22DF0ED70096C492 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5263D6922DF0ED70096C492 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -380,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -441,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
