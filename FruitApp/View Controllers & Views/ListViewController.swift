@@ -29,14 +29,27 @@ class ListViewController: BaseViewController {
         
         super.render()
         
-        eventLogger.startDate = Date()
+        if Reachability.isConnectedToNetwork() {
+            eventLogger.startDate = Date()
+            
+            collectionView?.collectionViewLayout.invalidateLayout()
+            activitySpinner?.frame = self.view.frame
+            
+            _ = presenter.getData(callback:{ (data, error) -> Void in
+                _ = self.presenter.presentData(data,error)
+            })
+        } else {
+            let uiAlertVC:UIAlertController = UIAlertController(title:"NO_NETWORK_TITLE".localized(),
+                                                                message:"NO_NETWORK".localized(),
+                                                                preferredStyle: UIAlertController.Style.alert)
+            let action:UIAlertAction = UIAlertAction(title:"OKAY".localized(),
+                                                     style:UIAlertAction.Style.default,
+                                                     handler:{ (myAlertAction: UIAlertAction!) in self.render() })
+            
+            uiAlertVC.addAction(action)
+            self.present(uiAlertVC, animated: true, completion: nil)
+        }
         
-        collectionView?.collectionViewLayout.invalidateLayout()
-        activitySpinner?.frame = self.view.frame
-        
-        _ = presenter.getData(callback:{ (data, error) -> Void in
-            _ = self.presenter.presentData(data,error)
-        })
     }
     
     // MARK: - Button actions

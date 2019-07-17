@@ -13,3 +13,6 @@
 "WEIGHT_UNKNOWN" = "Weight unknown";
 "KILOGRAM_UNIT" = "kg";
 
+"NO_NETWORK_TITLE" = "It appears that you are offline";
+"NO_NETWORK" = "Please check your internet connection.";
+"OKAY" = "Okay";

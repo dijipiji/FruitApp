@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
     }
     
     /**
-     * Override this as required in your superclass
+     * Override this as required in your subclass
      */
     func render() {
         
