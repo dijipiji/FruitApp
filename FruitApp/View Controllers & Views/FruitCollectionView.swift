@@ -22,12 +22,32 @@ class FruitCollectionView: UICollectionView,
     @IBOutlet weak var listViewController:ListViewController?
     
     fileprivate var columnNumber:Int = 3
+    fileprivate let minColumnNumber:Int = 1
+    fileprivate let maxColumnNumber:Int = 9
+    
+    public var flatListOfItems:[FruitEntity] = []
     fileprivate var items:[[FruitEntity]] = []
     
+    func modifyColumnNumber(_ num:Int) {
+        columnNumber += num
+        
+        if columnNumber > maxColumnNumber {
+            columnNumber = maxColumnNumber
+        } else if columnNumber < minColumnNumber {
+            columnNumber = minColumnNumber
+        }
+    }
+    
     /**
-     * The items need to be stored in a double array structure to match the row/column data referencing
+     * The items need to be stored in a double array structure to match the row/column data referencing,
+     * we also store a flat list of items for later use by the zoom component when we re-render content
      */
     func setItemsForCollectionFlowLayout(_ items:[FruitEntity]) {
+        
+        flatListOfItems = items
+        
+        self.items = []
+        
         _ = items.enumerated().map { [unowned self] (index, item) in
 
             if index%columnNumber == 0 {

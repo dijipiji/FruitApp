@@ -10,7 +10,6 @@ import UIKit
 
 class ListViewController: BaseViewController {
     
-    
     @IBOutlet weak var activitySpinner:UIActivityIndicatorView?
     @IBOutlet weak var collectionView:FruitCollectionView?
     
@@ -26,25 +25,52 @@ class ListViewController: BaseViewController {
         render()
     }
     
-    @objc func reload(_ btn:UIBarButtonItem) {
-        render()
-    }
-    
-    /**
-     * First we purge any displayed view and then add them back on to the hierarchy
-     */
     override func render() {
-
+        
         super.render()
         
         eventLogger.startDate = Date()
         
         collectionView?.collectionViewLayout.invalidateLayout()
         activitySpinner?.frame = self.view.frame
-
+        
         _ = presenter.getData(callback:{ (data, error) -> Void in
             _ = self.presenter.presentData(data,error)
         })
+    }
+    
+    // MARK: - Button actions
+    
+    @objc func reload(_ btn:UIBarButtonItem) {
+        render()
+    }
+    
+    @objc func zoom(_ btn:UIButton) {
+        
+        eventLogger.startDate = Date()
+        
+        guard let collectionView:FruitCollectionView = collectionView else {
+            eventLogger.sendErrorEvent(errorDescription:"ListViewController:\(#function) line:\(#line), there is no collectionView linked in your Storyboard")
+            return
+        }
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.modifyColumnNumber(btn.tag)
+        collectionView.setItemsForCollectionFlowLayout(collectionView.flatListOfItems)
+        collectionView.updateCellDisplay()
+        collectionView.reloadData()
+        
+        collectionView.alpha = 0.8
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            collectionView.alpha = 1
+        }, completion: {
+            (value: Bool) in
+            
+            self.eventLogger.endDate = Date()
+            self.eventLogger.sendDisplayEvent()
+        })
+        
     }
     
 }
@@ -95,17 +121,28 @@ extension ListViewController: ResultsViewController {
      */
     func renderResults(_ items:[FruitEntity]) {
         
-        collectionView?.frame = self.view.frame
-        collectionView?.setItemsForCollectionFlowLayout(items)
-        collectionView?.dataSource = collectionView
-        collectionView?.delegate = collectionView
+        guard let collectionView:FruitCollectionView = collectionView else {
+            eventLogger.sendErrorEvent(errorDescription:"ListViewController:\(#function) line:\(#line), there is no collectionView linked in your Storyboard")
+            return
+        }
+        
+        collectionView.frame = self.view.frame
+        collectionView.setItemsForCollectionFlowLayout(items)
+        collectionView.dataSource = collectionView
+        collectionView.delegate = collectionView
         
         // this ensures that cached cells also update their display on an orientation change
-        collectionView?.updateCellDisplay()
+        collectionView.updateCellDisplay()
         
+        let zoomComponent:ZoomComponent = ZoomComponent(frame:CGRect(x:self.view.frame.size.width-50,
+                                                                     y:self.view.frame.size.height-150,
+                                                                     width:50,height:100))
+        self.view.addSubview(zoomComponent)
+        zoomComponent.render(parentVC:self)
+
         renderComplete()
      
     }
     
-
+    
 }

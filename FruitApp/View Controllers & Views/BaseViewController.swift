@@ -22,16 +22,12 @@ class BaseViewController: UIViewController {
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
         self.view.frame = CGRect(origin: self.view.frame.origin, size: size)
         render()
-        
     }
     
-    
-    
     /**
-     * Override this as required
+     * Override this as required in your superclass
      */
     func render() {
         

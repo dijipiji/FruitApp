@@ -25,6 +25,7 @@
 		A5263D4D22DDC63A0096C492 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D4C22DDC63A0096C492 /* BaseViewController.swift */; };
 		A5263D5122DDCB8A0096C492 /* CurrencyPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */; };
 		A5263D5322DDF7350096C492 /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5222DDF7350096C492 /* EventLogger.swift */; };
+		A5263D5522DF00B90096C492 /* ZoomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263D5422DF00B90096C492 /* ZoomComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		A5263D4C22DDC63A0096C492 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5263D5022DDCB8A0096C492 /* CurrencyPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPrinter.swift; sourceTree = "<group>"; };
 		A5263D5222DDF7350096C492 /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
+		A5263D5422DF00B90096C492 /* ZoomComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				A5263D0722DC7B8B0096C492 /* AppDelegate.swift */,
-				A5263D4E22DDC6C20096C492 /* View Controllers */,
+				A5263D4E22DDC6C20096C492 /* View Controllers & Views */,
 				A5263D3822DC7E320096C492 /* Service.swift */,
 				A5263D3A22DC7EE70096C492 /* Presenter.swift */,
 				A5263D3C22DC94830096C492 /* Model.swift */,
@@ -152,15 +154,16 @@
 			path = FruitAppUITests;
 			sourceTree = "<group>";
 		};
-		A5263D4E22DDC6C20096C492 /* View Controllers */ = {
+		A5263D4E22DDC6C20096C492 /* View Controllers & Views */ = {
 			isa = PBXGroup;
 			children = (
 				A5263D4C22DDC63A0096C492 /* BaseViewController.swift */,
 				A5263D0922DC7B8B0096C492 /* ListViewController.swift */,
+				A5263D5422DF00B90096C492 /* ZoomComponent.swift */,
 				A5263D4822DCCFFB0096C492 /* FruitCollectionView.swift */,
 				A5263D3E22DCBDBF0096C492 /* SingleItemViewController.swift */,
 			);
-			path = "View Controllers";
+			path = "View Controllers & Views";
 			sourceTree = "<group>";
 		};
 		A5263D4F22DDC7140096C492 /* Utilities */ = {
@@ -309,6 +312,7 @@
 				A5263D3922DC7E320096C492 /* Service.swift in Sources */,
 				A5263D5322DDF7350096C492 /* EventLogger.swift in Sources */,
 				A5263D4D22DDC63A0096C492 /* BaseViewController.swift in Sources */,
+				A5263D5522DF00B90096C492 /* ZoomComponent.swift in Sources */,
 				A5263D3F22DCBDBF0096C492 /* SingleItemViewController.swift in Sources */,
 				A5263D4922DCCFFB0096C492 /* FruitCollectionView.swift in Sources */,
 				A5263D1022DC7B8B0096C492 /* FruitApp.xcdatamodeld in Sources */,
