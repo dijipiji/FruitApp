@@ -9,6 +9,8 @@
 import XCTest
 
 class FruitAppUITests: XCTestCase {
+    
+    var app: XCUIApplication!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,19 +18,109 @@ class FruitAppUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testReload() {
+        
+        let reloadButton = app.navigationBars["Fruits"].buttons["Refresh"]
+        XCTAssertTrue(reloadButton.exists)
+        
+        reloadButton.tap()
+        
+    }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testScreens() {
+
+        var cell = app.collectionViews.staticTexts["apple"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        
+        let back = app.navigationBars["Fruit"].buttons["Fruits"]
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["banana"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["blueberry"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["orange"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["pear"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["strawberry"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["kumquat"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["pitaya"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+        cell = app.collectionViews.staticTexts["kiwi"]
+        XCTAssertTrue(cell.exists)
+        cell.tap()
+        XCTAssertTrue(back.exists)
+        back.tap()
+        
+    }
+    
+    func testZoomUI() {
+        
+        let zoomInButton = app.buttons["+"]
+        XCTAssertTrue(zoomInButton.exists)
+        zoomInButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+        
+        let zoomOutButton = app.buttons["-"]
+        XCTAssertTrue(zoomOutButton.exists)
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+    
     }
 
 }
