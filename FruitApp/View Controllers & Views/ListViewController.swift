@@ -144,12 +144,13 @@ extension ListViewController: ResultsViewController {
      *
      */
     func renderResults(_ items:[FruitEntity]) {
-        
+ 
         guard let collectionView:FruitCollectionView = collectionView else {
             eventLogger.sendErrorEvent(errorDescription:"ListViewController:\(#function) line:\(#line), there is no collectionView linked in your Storyboard")
             return
         }
         
+        collectionView.collectionViewLayout.invalidateLayout()
         collectionView.frame = self.view.frame
         collectionView.setItemsForCollectionFlowLayout(items)
         collectionView.dataSource = collectionView

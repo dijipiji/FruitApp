@@ -36,7 +36,7 @@ class FruitAppUITests: XCTestCase {
     }
 
     func testScreens() {
-
+        
         var cell = app.collectionViews.staticTexts["apple"]
         XCTAssertTrue(cell.exists)
         cell.tap()
@@ -121,6 +121,29 @@ class FruitAppUITests: XCTestCase {
         zoomInButton.tap()
         zoomInButton.tap()
     
+    }
+    
+    func testOrientationChanges() {
+        XCUIDevice.shared.orientation = .portrait
+        XCUIDevice.shared.orientation = .landscapeLeft
+        
+        let app = XCUIApplication()
+        app.collectionViews/*@START_MENU_TOKEN@*/.staticTexts["blueberry"]/*[[".cells.staticTexts[\"blueberry\"]",".staticTexts[\"blueberry\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCUIDevice.shared.orientation = .portrait
+        XCUIDevice.shared.orientation = .landscapeLeft
+        XCUIDevice.shared.orientation = .portraitUpsideDown
+        XCUIDevice.shared.orientation = .landscapeRight
+        XCUIDevice.shared.orientation = .portraitUpsideDown
+        XCUIDevice.shared.orientation = .landscapeLeft
+        app.navigationBars["Fruit"].buttons["Fruits"].tap()
+        XCUIDevice.shared.orientation = .portrait
+        XCUIDevice.shared.orientation = .landscapeRight
+        XCUIDevice.shared.orientation = .portraitUpsideDown
+        XCUIDevice.shared.orientation = .landscapeRight
+        XCUIDevice.shared.orientation = .portrait
+        XCUIDevice.shared.orientation = .landscapeLeft
+        
+        
     }
 
 }
