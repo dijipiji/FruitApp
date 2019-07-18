@@ -29,6 +29,17 @@ class ListViewController: BaseViewController {
         
         super.render()
         
+        for v in self.view.subviews {
+            // we re-create and add these subviews everytime we render, so ensure to remove them if they already exist
+            if v is UILabel {
+                v.removeFromSuperview()
+            }
+            
+            if v is ZoomComponent {
+                v.removeFromSuperview()
+            }
+        }
+        
         if Reachability.isConnectedToNetwork() {
             eventLogger.startDate = Date()
             

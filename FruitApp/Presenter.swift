@@ -52,7 +52,11 @@ class Presenter: NSObject {
         }
         
         let items:[FruitEntity]? = model.parseJSONData(model.dataToJSON(data)!)
-     
+        
+        if items == nil {
+            eventLogger.sendErrorEvent(errorDescription:"Presenter:\(#function) line:\(#line), are no fruit items in the JSON data")
+        }
+        
         DispatchQueue.main.async {
             self.dataReady(items)
         }

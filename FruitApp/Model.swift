@@ -17,7 +17,6 @@ class Model: NSObject {
   
         do {
             let json:[String : Any]? = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-            
             return json
         } catch {
             return nil
